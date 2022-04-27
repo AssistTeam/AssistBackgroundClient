@@ -1,0 +1,32 @@
+﻿<Window x:Class="AssistBackgroundClient.Views.DebugWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:AssistBackgroundClient.Views"
+        mc:Ignorable="d"
+        Title="DebugWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="Debug Menu" FontFamily="{StaticResource WorkSans}" FontWeight="Bold" FontSize="28"></Label>
+        <Grid Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Column="0">
+                <Button Name="defSeqBtn" Click="DefSeqBtn_OnClick" Content="Launch Default Sequence"></Button>
+                <Button Name="launchValBtn" Click="LaunchValBtn_OnClick" Content="Launch Valorant"></Button>
+                <Button Name="connToVal" Click="ConnToVal_OnClick" Content="Connect to Valorant"></Button>
+                <Button Name="startDiscordBtn" Click="StartDiscordBtn_OnClick" Content="Start Discord RPC"></Button>
+                <Button Content="Start Hidden Server"></Button>
+            </StackPanel>
+            
+            <TextBlock Grid.Column="1" Background="Black" Foreground="Red" Text="{Binding vLogView}"></TextBlock>
+        </Grid>
+    </Grid>
+</Window>

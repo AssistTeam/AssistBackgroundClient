@@ -1,0 +1,15 @@
+﻿<Application x:Class="AssistBackgroundClient.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:AssistBackgroundClient">
+    <Application.Resources>
+        <FontFamily x:Key="WorkSans">pack://application:,,,/Resources/Fonts/#Work Sans</FontFamily>
+    
+    <!-- Color Redesign -->
+    <SolidColorBrush x:Key="AssistBackground" Color="#17181D"/>
+    <SolidColorBrush x:Key="Background" Color="#17181D"/>
+    <SolidColorBrush x:Key="AssistNavigationBar" Color="#101115"/>
+    <SolidColorBrush x:Key="AssistBackground2" Color="#17181D"/>
+    
+    </Application.Resources>
+</Application>

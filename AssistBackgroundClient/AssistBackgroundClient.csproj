@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="DiscordRichPresence" Version="1.0.175" />
+      <PackageReference Include="ValNet" Version="0.0.0.8" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\assistLogo.ico" />
+      <Resource Include="Resources\assistLogo.ico" />
+      <None Remove="Resources\Icons\Assist_Logo_SweetRed.png" />
+      <Resource Include="Resources\Icons\Assist_Logo_SweetRed.png" />
+      <None Remove="Resources\Icons\Assist_Logo_SweetRed_LQ.png" />
+      <Resource Include="Resources\Icons\Assist_Logo_SweetRed_LQ.png" />
+      <None Remove="Resources\Icons\Assist_Logo_White.png" />
+      <Resource Include="Resources\Icons\Assist_Logo_White.png" />
+      <None Remove="Resources\Fonts\WorkSans-Black.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-Black.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-BlackItalic.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-BlackItalic.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-Bold.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-Bold.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-BoldItalic.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-BoldItalic.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-ExtraBold.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-ExtraBold.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-ExtraBoldItalic.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-ExtraBoldItalic.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-ExtraLight.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-ExtraLight.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-ExtraLightItalic.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-ExtraLightItalic.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-Italic.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-Italic.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-Light.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-Light.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-LightItalic.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-LightItalic.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-Medium.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-Medium.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-MediumItalic.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-MediumItalic.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-Regular.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-Regular.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-SemiBold.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-SemiBold.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-SemiBoldItalic.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-SemiBoldItalic.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-Thin.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-Thin.ttf" />
+      <None Remove="Resources\Fonts\WorkSans-ThinItalic.ttf" />
+      <Resource Include="Resources\Fonts\WorkSans-ThinItalic.ttf" />
+    </ItemGroup>
+
+</Project>
