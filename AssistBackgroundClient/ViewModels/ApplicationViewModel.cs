@@ -25,7 +25,7 @@ public class ApplicationViewModel : ViewModelBase
 
     public void addLog(string a )
     {
-        vLogView += "\n" + a;
+        //vLogView += "\n" + a;
     }
 
     public async Task DefaultStartup()

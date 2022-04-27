@@ -40,7 +40,6 @@ namespace AssistBackgroundClient.Services
 
         private static void WriteToLog(string message)
         {
-            
             using (StreamWriter sw = new StreamWriter(logPath, append: true))
             {
                 sw.WriteLine($"[{DateTime.Now.ToString()}] : {message}");

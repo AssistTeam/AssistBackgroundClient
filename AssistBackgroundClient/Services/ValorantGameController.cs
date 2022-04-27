@@ -15,6 +15,10 @@ public class ValorantGameController
         {
             AssistLog.Debug("Trying to find client.");
             await FindValorantProcess();
+            
+            if(ValorantGameProcess != null)
+                break;
+            
             await Task.Delay(PROCESSCOOLDOWN);
         }
     }
@@ -25,9 +29,14 @@ public class ValorantGameController
         
         if(vProc == null)
             return;
+        
 
         ValorantGameProcess = vProc;
         ValorantGameProcess.EnableRaisingEvents = true;
+        
+        AssistLog.Debug("Found Valorant Process");
+        AssistLog.Debug($"Process ID: {vProc.Id}");
+        AssistLog.Debug($"Process Name: {vProc.ProcessName}");
         
         AssistLog.Normal("Found Valorant Game Process: " + ValorantGameProcess.Id);
     }

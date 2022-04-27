@@ -26,7 +26,9 @@
                 <Button Content="Start Hidden Server"></Button>
             </StackPanel>
             
-            <TextBlock Grid.Column="1" Background="Black" Foreground="Red" Text="{Binding vLogView}"></TextBlock>
+            <ScrollViewer Grid.Column="1" Name="scroller">
+                <TextBox Grid.Column="1" Background="Black" Foreground="Red" Text="{Binding vLogView}" IsReadOnly="True"></TextBox>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>

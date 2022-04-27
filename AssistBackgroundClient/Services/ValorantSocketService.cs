@@ -21,8 +21,6 @@ public class ValorantSocketService
         catch (Exception e)
         {
             AssistLog.Error(e.Message);
-            throw;
         }
-        
     }
 }

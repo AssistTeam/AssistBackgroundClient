@@ -16,13 +16,29 @@ public class RiotClientController
     
     public async Task StartClient()
     {
-        _riotClientPath = await FindRiotClient();
+        AssistLog.Debug("Finding Client");
+        try
+        {
+            _riotClientPath = await FindRiotClient();
+            if (_riotClientPath == null)
+                throw new Exception("Riot Client was not found on computer.");
+        }
+        catch (Exception e)
+        {
+            AssistLog.Error(e.Message);
+            return;
+        }
+        
+        
+        
         var clientLaunchArgs = new ProcessStartInfo
         {
             FileName = _riotClientPath,
             Arguments = CreateLaunchArgs()
         };
         
+        AssistLog.Debug("Launching path: " + clientLaunchArgs.FileName);
+        AssistLog.Debug("Launching Args: " + clientLaunchArgs.Arguments);
         RiotClientProcess = Process.Start(clientLaunchArgs);
     }
     async Task<string> FindRiotClient()
@@ -51,10 +67,11 @@ public class RiotClientController
         
         foreach (var clientPath in clients)
         {
+            AssistLog.Debug("Found Client: " + clientPath);
             if (File.Exists(clientPath))
                 return clientPath;
         }
-
+        AssistLog.Debug("Did not find client");
         return null;
     }
     string CreateLaunchArgs()
