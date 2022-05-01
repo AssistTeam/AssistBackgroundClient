@@ -34,11 +34,13 @@ public class RiotClientController
         var clientLaunchArgs = new ProcessStartInfo
         {
             FileName = _riotClientPath,
-            Arguments = CreateLaunchArgs()
+            Arguments = CreateLaunchArgs(),
+            UseShellExecute = true
         };
         
         AssistLog.Debug("Launching path: " + clientLaunchArgs.FileName);
         AssistLog.Debug("Launching Args: " + clientLaunchArgs.Arguments);
+        
         RiotClientProcess = Process.Start(clientLaunchArgs);
     }
     async Task<string> FindRiotClient()

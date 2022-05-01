@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
+using AssistBackgroundClient.Models;
 using ValNet;
 using WebSocketSharp;
 
@@ -48,7 +51,7 @@ public class BackgroundService
         }
         
         // Connection is successful
-        _socketService.ValorantUser.UserWebsocket.OnMessage += delegate(object? sender, MessageEventArgs args) { AssistLog.Debug(args.Data); };
+        _socketService.ValorantUser.UserWebsocket.OnMessage += HandleMessage;
     }
 
     private async Task FindValorantProcess()
@@ -68,8 +71,6 @@ public class BackgroundService
         if (_valorantGame.ValorantGameProcess == null)
             await FindValorantProcess();
     }
-
-
     public async Task LogService()
     {
         if(_valorantGame.ValorantGameProcess != null)
@@ -80,4 +81,17 @@ public class BackgroundService
         if(_valorantGame.ValorantGameProcess.HasExited)
             AssistLog.Debug($"Valorant Game Process is Exited");
     }
+
+    private async void HandleMessage(object? sender, MessageEventArgs e)
+    {
+        if (!e.Data.Contains("/chat/v4/presences") || !e.Data.Contains(_socketService.ValorantUser.UserData.sub))
+            return;
+        
+        var stuff = JsonSerializer.Deserialize<List<object>>(e.Data);
+        var dataObj = stuff[stuff.Count - 1].ToString();
+        var obj = JsonSerializer.Deserialize<PresencesV4DataObj>(dataObj);
+        
+        
+    }
+    
 }
