@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Forms;
 using AssistBackgroundClient.Services;
+using AssistBackgroundClient.Settings;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 
 namespace AssistBackgroundClient.Views;
@@ -42,14 +43,14 @@ public partial class AssistBgSettingsWindow : Window
     }
     
     #region Discord RPC Button Toggles
-    private void discordRpcToggle_Checked(object sender, RoutedEventArgs e)
+    private async void discordRpcToggle_Checked(object sender, RoutedEventArgs e)
     {
-        
+        await ApplicationService.BackgroundService.StartDiscordPresence();
     }
 
-    private void discordRpcToggle_UnChecked(object sender, RoutedEventArgs e)
+    private async void discordRpcToggle_UnChecked(object sender, RoutedEventArgs e)
     {
-
+        await ApplicationService.BackgroundService.StopDiscordPresence();
     }
     #endregion
 

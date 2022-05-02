@@ -55,4 +55,16 @@ public class DiscordPresenceService
         _client.Deinitialize();
         BDiscordPresenceActive = false;
     }
+
+    public async Task Shutdown()
+    {
+        if (!_client.IsDisposed)
+            _client.Dispose();
+
+        if (_client.IsInitialized)
+            _client.Deinitialize();
+
+        _client = new(APPID);
+        BDiscordPresenceActive = false;
+    }
 }

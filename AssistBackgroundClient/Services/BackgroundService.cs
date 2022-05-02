@@ -33,7 +33,7 @@ public class BackgroundService
     }
     public async Task StartGame()
     {
-        AssistLog.Normal("Start Game");
+        AssistLog.Normal("Starting Game");
         await _clientController.StartClient();
         
     }
@@ -81,9 +81,18 @@ public class BackgroundService
         {
             await ConnectToWebsocket();
         }
-
-        await _discordPresence.Initalize();
+        
+        if(_discordPresence.BDiscordPresenceActive == false)
+            await _discordPresence.Initalize();
     }
+
+        
+    public async Task StopDiscordPresence()
+    {
+        if(_discordPresence.BDiscordPresenceActive)
+            await _discordPresence.Shutdown();
+    }
+    
     public async Task LogService()
     {
         if(_valorantGame.ValorantGameProcess != null)
@@ -115,7 +124,7 @@ public class BackgroundService
 
 
     }
-
     public async Task UpdateCurrentPresence(RichPresence pres) => await _discordPresence.UpdatePresence(pres);
 
+    public bool bHasValorantExited => _valorantGame.ValorantGameProcess.HasExited;
 }

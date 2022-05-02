@@ -38,13 +38,14 @@ namespace AssistBackgroundClient
 
             CreateContextMenu();
 #if DEBUG
+            Current.MainWindow = new StartupWindow();     
             //Current.MainWindow = new DebugWindow();
             
 #else
             Current.MainWindow = new StartupWindow();     
 #endif
             
-            //Current.MainWindow.Show();
+            Current.MainWindow.Show();
         }
 
 

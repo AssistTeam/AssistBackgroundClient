@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AssistBackgroundClient.Services
@@ -40,12 +41,21 @@ namespace AssistBackgroundClient.Services
 
         private static void WriteToLog(string message)
         {
-            using (StreamWriter sw = new StreamWriter(logPath, append: true))
+            try
             {
-                sw.WriteLine($"[{DateTime.Now.ToString()}] : {message}");
+                using (StreamWriter sw = new StreamWriter(logPath, append: true))
+                {
+                    sw.WriteLine($"[{DateTime.Now.ToString()}] : {message}");
+                }
+                //ApplicationService.ApplicationViewModel.addLog(message);
+                Trace.WriteLine($"[{DateTime.Now.ToString()}] : {message}");
             }
-            ApplicationService.ApplicationViewModel.addLog(message);
-            Trace.WriteLine($"[{DateTime.Now.ToString()}] : {message}");
+            catch (Exception e)
+            {
+               return;
+            }
+            
         }
+        
     }
 }

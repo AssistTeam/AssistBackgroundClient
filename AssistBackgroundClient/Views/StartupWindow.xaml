@@ -12,6 +12,9 @@
             <RowDefinition Height="23"/>
         </Grid.RowDefinitions>
             
+        <Grid Background="{StaticResource AssistBackgroundLight}">
+            <Image Source="../Resources/Icons/Assist_Logo_SweetRed_LQ.png" Width="125" Height="125" RenderOptions.BitmapScalingMode="HighQuality"></Image>
+        </Grid>
         
         <!-- Status Label -->
         <Label Grid.Row="1" Content="{Binding Status}" FontSize="11"

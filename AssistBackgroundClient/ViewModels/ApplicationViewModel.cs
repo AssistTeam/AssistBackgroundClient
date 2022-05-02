@@ -1,14 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using AssistBackgroundClient.Services;
 
 namespace AssistBackgroundClient.ViewModels;
 
 public class ApplicationViewModel : ViewModelBase
 {
-    private BackgroundService BgService => ApplicationService.BackgroundService;
-
+    private BackgroundService _bgService => ApplicationService.BackgroundService;
+    private Thread _checkThread;
+    private bool _checkRunning = true;
     private string _status;
     public string Status {
         get => _status;
@@ -30,8 +34,31 @@ public class ApplicationViewModel : ViewModelBase
 
     public async Task DefaultStartup()
     {
+        AssistLog.Debug("Starting Default Seq");
         Status = "Starting...";
-        //await BgService.StartGame();
+        await _bgService.StartGame();
         Status = "Client Started.";
+        
+        await _bgService.StartService();
+        StartCheckThread();
+    }
+
+    private async void StartCheckThread()
+    {
+        object lok = new();
+        _checkThread = new(() =>
+        {
+            while (_checkRunning)
+            {
+                lock (lok)
+                {
+                    if (_bgService.bHasValorantExited)
+                        ApplicationService.ApplicationViewModel._checkRunning = false;
+                }
+            }
+            Environment.Exit(0);
+        });
+
+        _checkThread.Start();
     }
 }
