@@ -35,9 +35,10 @@ public partial class DebugWindow : Window
         await DebugSettings();
     }
 
-    private void StartDiscordBtn_OnClick(object sender, RoutedEventArgs e)
+    private async void StartDiscordBtn_OnClick(object sender, RoutedEventArgs e)
     {
         AssistLog.Debug("Attempting to Connect to Discord");
+        await _bgService.StartDiscordPresence();
     }
 
     private async Task DebugSettings()

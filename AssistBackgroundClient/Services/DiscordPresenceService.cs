@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using DiscordRPC;
 using DiscordRPC.Message;
 
@@ -10,8 +11,9 @@ public class DiscordPresenceService
     private DiscordRpcClient _client;
     private RichPresence _currentPresence;
     public bool BDiscordPresenceActive;
+    public DateTime timeStart;
     
-    public Button[] clientButtons = {
+    public static Button[] clientButtons = {
         new() {Label = "Download Assist", Url = "https://github.com/HeyM1ke/Assist/"}
     };
     public DiscordPresenceService()
@@ -20,7 +22,7 @@ public class DiscordPresenceService
     }
     public async Task Initalize()
     {
-        _client.OnReady += delegate(object sender, ReadyMessage args) { AssistLog.Normal("Discord Presence Client Ready, User: " + args.User.Username); };
+        _client.OnReady += delegate(object sender, ReadyMessage args) { AssistLog.Normal("Discord Presence Client Ready, User: " + args.User.Username); timeStart = DateTime.Now; };
         _currentPresence = new RichPresence {
             Buttons = clientButtons,
             Assets = new Assets()
@@ -35,7 +37,7 @@ public class DiscordPresenceService
                 Size = 1
             },
             Secrets = null,
-            State = "VALORANT"
+            State = "VALORANT",
         };
         _client.SetPresence(_currentPresence); 
         _client.Initialize();
@@ -53,6 +55,4 @@ public class DiscordPresenceService
         _client.Deinitialize();
         BDiscordPresenceActive = false;
     }
-    
-
 }

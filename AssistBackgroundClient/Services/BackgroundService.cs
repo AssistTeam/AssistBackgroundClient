@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AssistBackgroundClient.Models;
+using DiscordRPC;
 using ValNet;
 using WebSocketSharp;
 
@@ -10,7 +11,7 @@ namespace AssistBackgroundClient.Services;
 
 public class BackgroundService
 {
-    private DiscordPresenceService _discordPresence;
+    private DiscordPresenceService _discordPresence = new ();
     private ValorantGameController _valorantGame = new ();
     private ValorantSocketService _socketService = new ();
     private RiotClientController _clientController = new();
@@ -24,9 +25,12 @@ public class BackgroundService
         // Connect to Riot Websocket
         await ConnectToWebsocket();
         
+        // Start Discord RP
+        if (Settings.ApplicationSettings.RPEnabled)
+            await StartDiscordPresence();
+        
         AssistLog.Normal("Done!");
     }
-
     public async Task StartGame()
     {
         AssistLog.Normal("Start Game");
@@ -53,7 +57,6 @@ public class BackgroundService
         // Connection is successful
         _socketService.ValorantUser.UserWebsocket.OnMessage += HandleMessage;
     }
-
     private async Task FindValorantProcess()
     {
         // Find Valorant Process
@@ -71,6 +74,16 @@ public class BackgroundService
         if (_valorantGame.ValorantGameProcess == null)
             await FindValorantProcess();
     }
+
+    public async Task StartDiscordPresence()
+    {
+        if (_socketService.ValorantUser == null || _socketService.ValorantUser.AuthType != AuthType.Socket)
+        {
+            await ConnectToWebsocket();
+        }
+
+        await _discordPresence.Initalize();
+    }
     public async Task LogService()
     {
         if(_valorantGame.ValorantGameProcess != null)
@@ -81,17 +94,28 @@ public class BackgroundService
         if(_valorantGame.ValorantGameProcess.HasExited)
             AssistLog.Debug($"Valorant Game Process is Exited");
     }
-
     private async void HandleMessage(object? sender, MessageEventArgs e)
     {
+        AssistLog.Debug("Message Recieved");
         if (!e.Data.Contains("/chat/v4/presences") || !e.Data.Contains(_socketService.ValorantUser.UserData.sub))
             return;
-        
-        var stuff = JsonSerializer.Deserialize<List<object>>(e.Data);
-        var dataObj = stuff[stuff.Count - 1].ToString();
-        var obj = JsonSerializer.Deserialize<PresencesV4DataObj>(dataObj);
-        
-        
+
+        if (_discordPresence.BDiscordPresenceActive)
+        {
+            AssistLog.Debug("Discord Message Recieved");
+            var stuff = JsonSerializer.Deserialize<List<object>>(e.Data);
+            var dataObj = stuff[stuff.Count - 1].ToString();
+            var obj = JsonSerializer.Deserialize<PresencesV4DataObj>(dataObj);
+
+            var p = await ValorantRpcController.ParsePresenseMessage(obj);
+
+            AssistLog.Debug("Updating Pres");
+            await UpdateCurrentPresence(p);
+        }
+
+
     }
-    
+
+    public async Task UpdateCurrentPresence(RichPresence pres) => await _discordPresence.UpdatePresence(pres);
+
 }
