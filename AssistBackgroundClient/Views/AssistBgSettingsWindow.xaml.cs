@@ -13,7 +13,8 @@ public partial class AssistBgSettingsWindow : Window
     {
         InitializeComponent();
     }
-    
+
+    #region Window Methods/Events
     protected override void OnContentRendered(EventArgs e)
     {
         base.OnContentRendered(e);
@@ -21,6 +22,40 @@ public partial class AssistBgSettingsWindow : Window
         AssistLog.Normal(bL.ToString());
         MoveBottomRightEdgeOfWindowToMousePosition();
     }
+    private void UIElement_OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+    {
+        MoveBottomRightEdgeOfWindowToMousePosition();
+    }
+    private async void AssistBgSettingsWindow_OnInitialized(object? sender, EventArgs e)
+    {
+        discordRpcToggle.IsChecked = Settings.ApplicationSettings.RPEnabled;
+    }
+    private void AssistBgSettingsWindow_OnMouseLeave(object sender, MouseEventArgs e)
+    {
+        this.Hide();
+    }
+    #endregion
+    
+    private void Quit_Btn(object sender, RoutedEventArgs e)
+    {
+        Environment.Exit(0);
+    }
+    
+    #region Discord RPC Button Toggles
+    private void discordRpcToggle_Checked(object sender, RoutedEventArgs e)
+    {
+        
+    }
+
+    private void discordRpcToggle_UnChecked(object sender, RoutedEventArgs e)
+    {
+
+    }
+    #endregion
+
+    #region Misc
+
+    
     private void MoveBottomRightEdgeOfWindowToMousePosition()
     {
         var transform = PresentationSource.FromVisual(this).CompositionTarget.TransformFromDevice;
@@ -72,32 +107,5 @@ public partial class AssistBgSettingsWindow : Window
         return taskBarLocation;
     }
 
-    private void AssistBgSettingsWindow_OnMouseLeave(object sender, MouseEventArgs e)
-    {
-        this.Hide();
-    }
-    private void discordRpcToggle_Checked(object sender, RoutedEventArgs e)
-    {
-        
-    }
-
-    private void discordRpcToggle_UnChecked(object sender, RoutedEventArgs e)
-    {
-
-    }
-
-    private void Quit_Btn(object sender, RoutedEventArgs e)
-    {
-        Environment.Exit(0);
-    }
-
-    private void UIElement_OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-    {
-        MoveBottomRightEdgeOfWindowToMousePosition();
-    }
-
-    private async void AssistBgSettingsWindow_OnInitialized(object? sender, EventArgs e)
-    {
-        discordRpcToggle.IsChecked = Settings.ApplicationSettings.RPEnabled;
-    }
+    #endregion
 }
