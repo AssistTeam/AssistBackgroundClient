@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:AssistBackgroundClient.Views"
         mc:Ignorable="d"
-        Title="StartupWindow" Height="200" Width="400" Loaded="StartupWindow_OnLoaded">
+        Title="StartupWindow" Height="200" Width="400" Loaded="StartupWindow_OnLoaded" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
     <Grid Background="{StaticResource AssistBackground}">
         <Grid.RowDefinitions>
             <RowDefinition/>

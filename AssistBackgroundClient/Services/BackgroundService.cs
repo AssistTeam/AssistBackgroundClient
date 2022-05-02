@@ -19,16 +19,17 @@ public class BackgroundService
     private const int PROCESSCOOLDOWN = 5000;
     public async Task StartService()
     {
-        AssistLog.Debug("Starting Trying to find Valorant Process");
-        await FindValorantProcess();
-        
+        AssistLog.Debug("Starting Trying to Find Valorant Process");
+        ApplicationService.ApplicationViewModel.Status = "Waiting for Valorant Game";
+            await FindValorantProcess();
+        ApplicationService.ApplicationViewModel.Status = "Connecting to Valorant Game";
         // Connect to Riot Websocket
         await ConnectToWebsocket();
-        
+        ApplicationService.ApplicationViewModel.Status = "Checking Settings";
         // Start Discord RP
         if (Settings.ApplicationSettings.RPEnabled)
             await StartDiscordPresence();
-        
+        ApplicationService.ApplicationViewModel.Status = "Done!";
         AssistLog.Normal("Done!");
     }
     public async Task StartGame()

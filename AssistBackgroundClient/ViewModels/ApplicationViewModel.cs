@@ -38,7 +38,7 @@ public class ApplicationViewModel : ViewModelBase
         Status = "Starting...";
         await _bgService.StartGame();
         Status = "Client Started.";
-        
+        Status = "Starting Service.";
         await _bgService.StartService();
         StartCheckThread();
     }
