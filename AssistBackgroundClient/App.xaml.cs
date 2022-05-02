@@ -20,7 +20,7 @@ namespace AssistBackgroundClient
     public partial class App : Application
     {
         private System.Windows.Forms.NotifyIcon _notifyIcon;
-
+        private AssistBgSettingsWindow _settingsWindow;
         protected override void OnStartup(StartupEventArgs e)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
@@ -29,6 +29,8 @@ namespace AssistBackgroundClient
             AssistLog.Normal("Starting BG Client");
             AssistLog.Normal($"ARGS: {string.Join(" ", e.Args)}");
             ParseArguments(e);
+            _settingsWindow = new AssistBgSettingsWindow();
+            
             _notifyIcon = new System.Windows.Forms.NotifyIcon();
             _notifyIcon.DoubleClick += (sender, args) => OpenSettingsWindow();
             _notifyIcon.Icon = AssistBackgroundClient.Properties.Resources.assistLogo;
@@ -36,13 +38,13 @@ namespace AssistBackgroundClient
 
             CreateContextMenu();
 #if DEBUG
-            Current.MainWindow = new DebugWindow();
+            //Current.MainWindow = new DebugWindow();
             
 #else
             Current.MainWindow = new StartupWindow();     
 #endif
             
-            Current.MainWindow.Show();
+            //Current.MainWindow.Show();
         }
 
 
@@ -83,7 +85,18 @@ namespace AssistBackgroundClient
 
         private void OpenSettingsWindow()
         {
-            new AssistBgSettingsWindow().Show();
+            if (_settingsWindow.IsVisible)
+            {
+                if (_settingsWindow.WindowState == WindowState.Minimized)
+                {
+                    _settingsWindow.WindowState = WindowState.Normal;
+                }
+                _settingsWindow.Activate();
+            }
+            else
+            {
+                _settingsWindow.Show();
+            }
         }
         private void ExitApplication()
         {

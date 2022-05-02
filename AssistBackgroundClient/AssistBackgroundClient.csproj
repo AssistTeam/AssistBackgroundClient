@@ -58,6 +58,8 @@
       <Resource Include="Resources\Fonts\WorkSans-Thin.ttf" />
       <None Remove="Resources\Fonts\WorkSans-ThinItalic.ttf" />
       <Resource Include="Resources\Fonts\WorkSans-ThinItalic.ttf" />
+      <None Remove="Resources\Icons\Check_Icon.png" />
+      <Resource Include="Resources\Icons\Check_Icon.png" />
     </ItemGroup>
 
     <ItemGroup>

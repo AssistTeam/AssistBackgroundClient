@@ -3,13 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:AssistBackgroundClient">
     <Application.Resources>
-        <FontFamily x:Key="WorkSans">pack://application:,,,/Resources/Fonts/#Work Sans</FontFamily>
     
-    <!-- Color Redesign -->
-    <SolidColorBrush x:Key="AssistBackground" Color="#17181D"/>
-    <SolidColorBrush x:Key="Background" Color="#17181D"/>
-    <SolidColorBrush x:Key="AssistNavigationBar" Color="#101115"/>
-    <SolidColorBrush x:Key="AssistBackground2" Color="#17181D"/>
+        <!-- Color Resources -->
+        <SolidColorBrush x:Key="AssistBackgroundLight" Color="#0f1115"></SolidColorBrush>
+        <SolidColorBrush x:Key="AssistBackgroundSuperLight" Color="#364159"></SolidColorBrush>
+        
+        <SolidColorBrush x:Key="AssistNavigationButton_SelectedFill" Color="#33CF1439"/>
+        <SolidColorBrush x:Key="AssistNavigationButton_SelectedOutline" Color="#CF1439"/>
+
+        <SolidColorBrush x:Key="AssistNavigationButton_NotSelectedFill" Color="#33414958"/>
+        <SolidColorBrush x:Key="AssistNavigationButton_NotSelectedOutline" Color="#33111822"/>
+
+        <SolidColorBrush x:Key="AssistNavigationButton_SelectedHighlightFill" Color="#33EA1842"></SolidColorBrush>
+        <SolidColorBrush x:Key="AssistNavigationButton_SelectedHighlightOutline" Color="#FFF12E54"/>
+
+        <SolidColorBrush x:Key="AssistBackground" Color="#17181D"/>
+        <SolidColorBrush x:Key="Background" Color="#17181D"/>
+        <SolidColorBrush x:Key="AssistNavigationBar" Color="#101115"/>
+        <SolidColorBrush x:Key="AssistBackground2" Color="#17181D"/>
+
+        <!-- Font Family -->
+        <FontFamily x:Key="WorkSans">pack://application:,,,/Resources/Fonts/#Work Sans</FontFamily>
     
     </Application.Resources>
 </Application>

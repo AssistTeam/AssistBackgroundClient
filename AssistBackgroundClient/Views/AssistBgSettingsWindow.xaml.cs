@@ -2,11 +2,13 @@
 using System.Windows;
 using System.Windows.Forms;
 using AssistBackgroundClient.Services;
+using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 
 namespace AssistBackgroundClient.Views;
 
 public partial class AssistBgSettingsWindow : Window
 {
+    private enum TaskBarLocation { TOP, BOTTOM, LEFT, RIGHT}
     public AssistBgSettingsWindow()
     {
         InitializeComponent();
@@ -19,7 +21,6 @@ public partial class AssistBgSettingsWindow : Window
         AssistLog.Normal(bL.ToString());
         MoveBottomRightEdgeOfWindowToMousePosition();
     }
-
     private void MoveBottomRightEdgeOfWindowToMousePosition()
     {
         var transform = PresentationSource.FromVisual(this).CompositionTarget.TransformFromDevice;
@@ -44,17 +45,11 @@ public partial class AssistBgSettingsWindow : Window
                 break;
         }
     }
-    
-    
-
     public System.Windows.Point GetMousePosition()
     {
         System.Drawing.Point point = System.Windows.Forms.Control.MousePosition;
         return new System.Windows.Point(point.X, point.Y);
     }
-    
-    private enum TaskBarLocation { TOP, BOTTOM, LEFT, RIGHT}
-
     private TaskBarLocation GetTaskBarLocation()
     {
         TaskBarLocation taskBarLocation = TaskBarLocation.BOTTOM;
@@ -75,5 +70,34 @@ public partial class AssistBgSettingsWindow : Window
             }
         }
         return taskBarLocation;
+    }
+
+    private void AssistBgSettingsWindow_OnMouseLeave(object sender, MouseEventArgs e)
+    {
+        this.Hide();
+    }
+    private void discordRpcToggle_Checked(object sender, RoutedEventArgs e)
+    {
+        
+    }
+
+    private void discordRpcToggle_UnChecked(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Quit_Btn(object sender, RoutedEventArgs e)
+    {
+        Environment.Exit(0);
+    }
+
+    private void UIElement_OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+    {
+        MoveBottomRightEdgeOfWindowToMousePosition();
+    }
+
+    private async void AssistBgSettingsWindow_OnInitialized(object? sender, EventArgs e)
+    {
+        discordRpcToggle.IsChecked = Settings.ApplicationSettings.RPEnabled;
     }
 }
