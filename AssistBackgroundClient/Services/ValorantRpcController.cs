@@ -117,7 +117,7 @@ public class ValorantRpcController
         if (privacy == Party.PrivacySetting.Public)
             partyState = "In an Open Party";
         else
-            partyState = "In an Closed Party";
+            partyState = "In a Closed Party";
         
         return new RichPresence()
         {
@@ -172,7 +172,7 @@ public class ValorantRpcController
                 case "deathmatch":
                     return "Deathmatch";
                 case "spikerush":
-                    return "SpikeRush";
+                    return "Spike Rush";
                 case "competitive":
                     return "Competitive";
                 case "unrated":

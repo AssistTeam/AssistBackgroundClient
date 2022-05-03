@@ -54,6 +54,8 @@ public class ApplicationViewModel : ViewModelBase
                 {
                     if (_bgService.bHasValorantExited)
                         ApplicationService.ApplicationViewModel._checkRunning = false;
+                    
+                    Thread.Sleep(1000);
                 }
             }
             Environment.Exit(0);
