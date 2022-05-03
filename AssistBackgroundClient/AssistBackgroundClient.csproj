@@ -6,6 +6,7 @@
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
         <UseWindowsForms>True</UseWindowsForms>
+        <ApplicationIcon>Resources\assistLogo.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
@@ -59,6 +60,7 @@
       <None Remove="Resources\Fonts\WorkSans-ThinItalic.ttf" />
       <Resource Include="Resources\Fonts\WorkSans-ThinItalic.ttf" />
       <None Remove="Resources\Icons\Check_Icon.png" />
+      <Content Include="Resources\assistLogo.ico" />
       <Resource Include="Resources\Icons\Check_Icon.png" />
     </ItemGroup>
 

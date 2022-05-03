@@ -75,7 +75,6 @@ public class BackgroundService
         if (_valorantGame.ValorantGameProcess == null)
             await FindValorantProcess();
     }
-
     public async Task StartDiscordPresence()
     {
         if (_socketService.ValorantUser == null || _socketService.ValorantUser.AuthType != AuthType.Socket)
@@ -86,14 +85,11 @@ public class BackgroundService
         if(_discordPresence.BDiscordPresenceActive == false)
             await _discordPresence.Initalize();
     }
-
-        
     public async Task StopDiscordPresence()
     {
         if(_discordPresence.BDiscordPresenceActive)
             await _discordPresence.Shutdown();
     }
-    
     public async Task LogService()
     {
         if(_valorantGame.ValorantGameProcess != null)
@@ -128,4 +124,5 @@ public class BackgroundService
     public async Task UpdateCurrentPresence(RichPresence pres) => await _discordPresence.UpdatePresence(pres);
 
     public bool bHasValorantExited => _valorantGame.ValorantGameProcess.HasExited;
+    public bool bIsDiscordActive => _discordPresence.BDiscordPresenceActive;
 }

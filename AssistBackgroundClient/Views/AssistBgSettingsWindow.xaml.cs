@@ -72,12 +72,12 @@ public partial class AssistBgSettingsWindow : Window
                 Top = mouse.Y - 50 - ActualHeight;
                 break;
             case TaskBarLocation.LEFT:
-                Left = mouse.X + (Width + 100) - ActualWidth;
-                Top = mouse.Y - 100 - ActualHeight;
+                Left = mouse.X + (Width + 50) - ActualWidth;
+                Top = mouse.Y - 50 - ActualHeight;
                 break;
             default:
                 Left = mouse.X - ActualWidth;
-                Top = mouse.Y - 100 - ActualHeight;
+                Top = mouse.Y - 50 - ActualHeight;
                 break;
         }
     }

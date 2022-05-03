@@ -57,12 +57,51 @@ public class ValorantRpcController
     private static async Task<RichPresence> CreatePregameStatus()
     {
         var pres = await GetBasePresence();
+        
+        string state = "Agent Select";
+
+        string mapName = await DetermineMapKey();
+        string currQueue = await DetermineQueueKey();
+        string details;
+        if (userPrivateData.partyState.Contains("CUSTOM_GAME"))
+            details = "Custom Game || Agent Select";
+        else
+        {
+            details = $"{currQueue} || Agent Select";
+        }
+        
+        // Set Map Image
+        pres.Assets = new Assets
+        {
+            LargeImageKey = mapName.ToLower(),
+            LargeImageText = "Powered By Assist"
+        };
+
+        pres.Details = details;
+        
         return pres;
     }
     
     private static async Task<RichPresence> CreateIngameStatus()
     {
         var pres = await GetBasePresence();
+        string mapName = await DetermineMapKey();
+        string currQueue = await DetermineQueueKey();
+        string details;
+        if (userPrivateData.partyState.Contains("CUSTOM_GAME"))
+            details = $"Custom Game || {userPrivateData.partyOwnerMatchScoreAllyTeam}-{userPrivateData.partyOwnerMatchScoreEnemyTeam}";
+        else
+            details = $"{currQueue} || {userPrivateData.partyOwnerMatchScoreAllyTeam}-{userPrivateData.partyOwnerMatchScoreEnemyTeam}";
+        
+        // Set Map Image
+        pres.Assets = new Assets
+        {
+            LargeImageKey = mapName.ToLower(),
+            LargeImageText = "Powered By Assist"
+        };
+
+        pres.Details = details;
+        
         return pres;
     }
 

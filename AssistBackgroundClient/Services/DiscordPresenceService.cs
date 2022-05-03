@@ -54,6 +54,7 @@ public class DiscordPresenceService
     {
         _client.Deinitialize();
         BDiscordPresenceActive = false;
+        
     }
 
     public async Task Shutdown()
