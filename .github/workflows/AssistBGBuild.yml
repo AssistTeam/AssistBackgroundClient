@@ -1,0 +1,38 @@
+name: AssistBG Github Builder
+
+on:
+  workflow_dispatch:
+    inputs:
+        appVersion:
+          description: 'AssistBG Version'
+          required: true
+          default: '1.0.X.X'
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: GIT Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+
+      - name: .NET 6 Setup
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+          
+      - name: .NET Restore
+        run: dotnet restore AssistBackgroundClient
+
+      - name: .NET Publish
+        run: dotnet publish AssistBackgroundClient -c Release --no-self-contained -r win-x64 -f net6.0-windows -o "./Assist/bin/Publish/" -p:PublishReadyToRun=false -p:PublishSingleFile=true -p:DebugType=None -p:GenerateDocumentationFile=false -p:DebugSymbols=false -p:AssemblyVersion=${{ github.event.inputs.appVersion }} -p:FileVersion=${{ github.event.inputs.appVersion }}
+
+      - name: GIT Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          title: "Assist v${{ github.event.inputs.appVersion }}"
+          automatic_release_tag: ${{ github.event.inputs.appVersion }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false
+          files: ./Assist/bin/Publish/AssistBackgroundClient.exe
