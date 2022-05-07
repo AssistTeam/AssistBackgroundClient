@@ -23,6 +23,12 @@ public class DiscordPresenceService
     public async Task Initalize()
     {
         _client.OnReady += delegate(object sender, ReadyMessage args) { AssistLog.Normal("Discord Presence Client Ready, User: " + args.User.Username); timeStart = DateTime.Now; };
+        _client.OnConnectionFailed += delegate(object sender, ConnectionFailedMessage args)
+        {
+            AssistLog.Normal("Discord Presence Client Failed to Connect to Discord, failed pipe number: " +
+                             args.FailedPipe);
+            return;
+        };
         _currentPresence = new RichPresence {
             Buttons = clientButtons,
             Assets = new Assets()
