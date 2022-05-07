@@ -48,7 +48,14 @@ namespace AssistBackgroundClient
             Current.MainWindow.Show();
         }
 
-
+        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            AssistLog.Error("Unhandled Ex Source: " + e.Exception.Source);
+            AssistLog.Error("Unhandled Ex StackTrace: " + e.Exception.StackTrace);
+            AssistLog.Error("Unhandled Ex Message: " + e.Exception.Message);
+            MessageBox.Show(e.Exception.Message, "AssistBG Hit an Error : Logfile Created : If the error persists please reach out on the official discord server.", MessageBoxButton.OK, MessageBoxImage.Warning);
+            
+        }
         private void ParseArguments(StartupEventArgs e)
         {
             foreach (var arg in e.Args)
