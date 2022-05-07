@@ -39,9 +39,20 @@ public class DiscordPresenceService
             Secrets = null,
             State = "VALORANT",
         };
-        _client.SetPresence(_currentPresence); 
-        _client.Initialize();
-        BDiscordPresenceActive = true;
+
+        _client.SetPresence(_currentPresence);
+        try
+        {
+            _client.Initialize();
+            BDiscordPresenceActive = true;
+        }
+        catch (Exception e)
+        {
+            AssistLog.Error("Unhandled Ex Source: " + e.Source);
+            AssistLog.Error("Unhandled Ex StackTrace: " + e.StackTrace);
+            AssistLog.Error("Unhandled Ex Message: " + e.Message);
+        }
+        
     }
     public async Task UpdatePresence(RichPresence data)
     {
@@ -52,8 +63,18 @@ public class DiscordPresenceService
     }
     public async Task Deinitalize()
     {
-        _client.Deinitialize();
-        BDiscordPresenceActive = false;
+        try
+        {
+            _client.Deinitialize();
+            BDiscordPresenceActive = false;
+        }
+        catch (Exception e)
+        {
+            AssistLog.Error("Unhandled Ex Source: " + e.Source);
+            AssistLog.Error("Unhandled Ex StackTrace: " + e.StackTrace);
+            AssistLog.Error("Unhandled Ex Message: " + e.Message);
+        }
+        
         
     }
 
