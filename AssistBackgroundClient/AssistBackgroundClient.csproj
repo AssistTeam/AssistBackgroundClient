@@ -8,12 +8,13 @@
         <UseWindowsForms>True</UseWindowsForms>
         <ApplicationIcon>Resources\assistLogo.ico</ApplicationIcon>
         <Version>1.0.0.4</Version>
+        <PackageVersion>1.0.0.5</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="CliWrap" Version="3.4.4" />
       <PackageReference Include="DiscordRichPresence" Version="1.0.175" />
-      <PackageReference Include="ValNet" Version="0.0.0.9" />
+      <PackageReference Include="ValNet" Version="0.0.0.11" />
     </ItemGroup>
 
     <ItemGroup>

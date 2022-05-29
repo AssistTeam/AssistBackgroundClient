@@ -56,7 +56,7 @@ public class BackgroundService
         }
         
         // Connection is successful
-        _socketService.ValorantUser.UserWebsocket.OnMessage += HandleMessage;
+        _socketService.ValorantUser.Authentication.userWebsocket.OnMessage += HandleMessage;
     }
     private async Task FindValorantProcess()
     {
