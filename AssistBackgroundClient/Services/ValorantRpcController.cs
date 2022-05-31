@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AssistBackgroundClient.Models;
+using AssistBackgroundClient.Objects;
 using DiscordRPC;
 
 namespace AssistBackgroundClient.Services;
@@ -74,7 +75,9 @@ public class ValorantRpcController
         pres.Assets = new Assets
         {
             LargeImageKey = mapName.ToLower(),
-            LargeImageText = "Powered By Assist"
+            LargeImageText = "Powered By Assist",
+            SmallImageKey = $"rank_{userPrivateData.competitiveTier}",
+            SmallImageText = $"{ValorantRanks.Ranks[userPrivateData.competitiveTier]}"
         };
 
         pres.Details = details;
@@ -90,6 +93,8 @@ public class ValorantRpcController
         string details;
         if (userPrivateData.partyState.Contains("CUSTOM_GAME"))
             details = $"Custom Game || {userPrivateData.partyOwnerMatchScoreAllyTeam}-{userPrivateData.partyOwnerMatchScoreEnemyTeam}";
+        else if (userPrivateData.matchMap.Contains("Range"))
+            details = $"Tapping Heads in the Range.";
         else
             details = $"{currQueue} || {userPrivateData.partyOwnerMatchScoreAllyTeam}-{userPrivateData.partyOwnerMatchScoreEnemyTeam}";
         
@@ -97,9 +102,11 @@ public class ValorantRpcController
         pres.Assets = new Assets
         {
             LargeImageKey = mapName.ToLower(),
-            LargeImageText = "Powered By Assist"
+            LargeImageText = "Powered By Assist",
+            SmallImageKey = $"rank_{userPrivateData.competitiveTier}",
+            SmallImageText = $"{ValorantRanks.Ranks[userPrivateData.competitiveTier]}"
         };
-
+        
         pres.Details = details;
         
         return pres;
@@ -124,7 +131,9 @@ public class ValorantRpcController
             Assets = new Assets
             {
                 LargeImageKey = "default",
-                LargeImageText = "Powered By Assist"
+                LargeImageText = "Powered By Assist",
+                SmallImageKey = $"rank_{userPrivateData.competitiveTier}",
+                SmallImageText = $"{ValorantRanks.Ranks[userPrivateData.competitiveTier]}"
             },
             Buttons = DiscordPresenceService.clientButtons,
             State = partyState,
