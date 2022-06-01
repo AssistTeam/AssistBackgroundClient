@@ -14,7 +14,7 @@ public class ValorantSocketService
         try
         {
             var u = new RiotUser();
-            var w = await u.Authentication.AuthenticateWithSocket();
+            var w = await u.Authentication.AuthenticateWithSocketCurl();
             if (w.bIsAuthComplete)
                 ValorantUser = u;
         }

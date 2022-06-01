@@ -8,13 +8,14 @@
         <UseWindowsForms>True</UseWindowsForms>
         <ApplicationIcon>Resources\assistLogo.ico</ApplicationIcon>
         <Version>1.0.0.4</Version>
-        <PackageVersion>1.0.0.5</PackageVersion>
+        <PackageVersion>1.0.0.7</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="CliWrap" Version="3.4.4" />
       <PackageReference Include="DiscordRichPresence" Version="1.0.175" />
-      <PackageReference Include="ValNet" Version="0.0.0.11" />
+      <PackageReference Include="RestSharp" Version="107.3.0" />
+      <PackageReference Include="websocketsharp.core" Version="1.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -80,6 +81,12 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="ValNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <HintPath>..\..\..\..\Valorant Projects\ValNet\src\bin\Debug\net6.0\ValNet.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>
