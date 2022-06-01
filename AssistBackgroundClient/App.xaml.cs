@@ -109,7 +109,9 @@ namespace AssistBackgroundClient
         private void ExitApplication()
         {
             _notifyIcon.Dispose();
+            _notifyIcon.Visible = false;
             _notifyIcon = null;
+            Current.Shutdown();
         }
     }
 }
