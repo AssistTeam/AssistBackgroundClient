@@ -165,6 +165,8 @@ public class ValorantRpcController
                     return "Haven";
                 case "/Game/Maps/Port/Port":
                     return "Icebox";
+                case "/Game/Maps/Pitt/Pitt":
+                    return "Pearl";
                 case "/Game/Maps/Poveglia/Range":
                     return "Range";
                 default:
