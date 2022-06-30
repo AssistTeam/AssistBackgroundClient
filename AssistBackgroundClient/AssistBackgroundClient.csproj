@@ -8,7 +8,7 @@
         <UseWindowsForms>True</UseWindowsForms>
         <ApplicationIcon>Resources\assistLogo.ico</ApplicationIcon>
         <Version>1.0.0.7</Version>
-        <PackageVersion>1.0.0.7</PackageVersion>
+        <PackageVersion>1.0.0.8</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
