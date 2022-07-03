@@ -31,11 +31,15 @@ public class ValorantRanks
         {19, "Diamond 2"},
         {20, "Diamond 3"},
         
-        {21, "Immortal 1"},
-        {22, "Immortal 2"},
-        {23, "Immortal 3"},
+        {21, "Ascendant 1"},
+        {22, "Ascendant 2"},
+        {23, "Ascendant 3"},
         
-        {24, "Radiant"},
+        {24, "Immortal 1"},
+        {25, "Immortal 2"},
+        {26, "Immortal 3"},
+        
+        {27, "Radiant"},
 
     };
 }
